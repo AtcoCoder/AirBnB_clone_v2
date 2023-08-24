@@ -8,7 +8,6 @@ USER = getenv('HBNB_MYSQL_USER')
 PASSWORD = getenv('HBNB_MYSQL_PWD')
 HOST = getenv('HBNB_MYSQL_HOST')
 DATABASE = getenv('HBNB_MYSQL_DB')
-Base = declarative_base()
 
 
 class DBStorage:
@@ -20,6 +19,7 @@ class DBStorage:
         self.__engine = create_engine("mysql+mysqldb://{}:{}@{}/{}".format(
             USER, PASSWORD, HOST, DATABASE), pool_pre_ping=True)
         if getenv('HBNB_ENV') == 'test':
+            Base = declarative_base()
             Base.metadata.drop_all(self)
 
     def all(self, cls=None):
@@ -40,6 +40,7 @@ class DBStorage:
             for obj in objs:
                 key = '{}.{}'.format(a_cls, obj.id)
                 cls_dict[key] = obj
+        print(cls_dict)
         return cls_dict
 
     def new(self, obj):
@@ -63,7 +64,7 @@ class DBStorage:
         from models.amenity import Amenity
         from models.place import Place
         from models.review import Review
-        from models.base_model import BaseModel
+        from models.base_model import BaseModel, Base
 
 
         Base.metadata.create_all(self.__engine)
