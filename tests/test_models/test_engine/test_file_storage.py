@@ -31,6 +31,7 @@ class test_fileStorage(unittest.TestCase):
     def test_new(self):
         """ New object is correctly added to __objects """
         new = BaseModel()
+        new.save()
         for obj in storage.all().values():
             temp = obj
         self.assertTrue(temp is obj)
@@ -38,13 +39,24 @@ class test_fileStorage(unittest.TestCase):
     def test_all(self):
         """ __objects is properly returned """
         new = BaseModel()
+        new.save()
         temp = storage.all()
         self.assertIsInstance(temp, dict)
 
     def test_base_model_instantiation(self):
         """ File is not created on BaseModel save """
+        if os.path.isfile('file.json'):
+            os.system('rm file.json')
         new = BaseModel()
         self.assertFalse(os.path.exists('file.json'))
+
+    def test_base_model_instantiation(self):
+        """ File is created on BaseModel save"""
+        if os.path.isfile('file.json'):
+            os.system('rm file.json')
+        new = BaseModel()
+        new.save()
+        self.assertTrue(os.path.exists('file.json'))
 
     def test_empty(self):
         """ Data is saved to file """
@@ -63,7 +75,7 @@ class test_fileStorage(unittest.TestCase):
     def test_reload(self):
         """ Storage file is successfully loaded to __objects """
         new = BaseModel()
-        storage.save()
+        new.save()
         storage.reload()
         for obj in storage.all().values():
             loaded = obj
@@ -97,7 +109,9 @@ class test_fileStorage(unittest.TestCase):
     def test_key_format(self):
         """ Key is properly formatted """
         new = BaseModel()
+        new.save()
         _id = new.to_dict()['id']
+        temp = ''
         for key in storage.all().keys():
             temp = key
         self.assertEqual(temp, 'BaseModel' + '.' + _id)
