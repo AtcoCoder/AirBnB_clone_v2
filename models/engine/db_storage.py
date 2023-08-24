@@ -20,18 +20,18 @@ class DBStorage:
         self.__engine = create_engine("mysql+mysqldb://{}:{}@{}/{}".format(
             USER, PASSWORD, HOST, DATABASE), pool_pre_ping=True)
         if getenv('HBNB_ENV') == 'test':
-            Base.metadata.drop_all()
+            Base.metadata.drop_all(self)
 
     def all(self, cls=None):
         """"Query on the current database session all objects depending
         of the class name 'cls', if cls is none is then all classes"""
-        from models import User
-        from models import State
-        from models import City
-        from models import Amenity
-        from models import Place
-        from models import Review
-        from models import BaseModel
+        from models.user import User
+        from models.state import State
+        from models.city import City
+        from models.amenity import Amenity
+        from models.place import Place
+        from models.review import Review
+        from models.base_model import BaseModel
         cls_dict = {}
         if cls is None:
             cls = (User, State, City, Amenity, Place, Review)
@@ -57,13 +57,14 @@ class DBStorage:
     
     def reload(self):
         """Create all tables in the database if not exists """
-        from models import BaseModel
-        from models import User
-        from models import State
-        from models import City
-        from models import Amenity
-        from models import Place
-        from models import Review
+        from models.user import User
+        from models.state import State
+        from models.city import City
+        from models.amenity import Amenity
+        from models.place import Place
+        from models.review import Review
+        from models.base_model import BaseModel
+
 
         Base.metadata.create_all(self.__engine)
         session_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
