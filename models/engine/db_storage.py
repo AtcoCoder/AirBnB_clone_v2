@@ -33,14 +33,16 @@ class DBStorage:
         from models.review import Review
         from models.base_model import BaseModel
         cls_dict = {}
+        cls_list = []
         if cls is None:
-            cls = (User, State, City, Amenity, Place, Review)
-        for a_cls in cls:
+            cls_list += [State, City]
+        else:
+            cls_list.append(cls)
+        for a_cls in cls_list:
             objs = self.__session.query(a_cls).all()
             for obj in objs:
-                key = '{}.{}'.format(a_cls, obj.id)
+                key = '{}.{}'.format(obj.__class__.__name__, obj.id)
                 cls_dict[key] = obj
-        print(cls_dict)
         return cls_dict
 
     def new(self, obj):
