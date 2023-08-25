@@ -55,7 +55,7 @@ class DBStorage:
         """Delete from the current database session obj if not None """
         if obj:
             self.__session.delete(obj)
-    
+
     def reload(self):
         """Create all tables in the database if not exists """
         from models.user import User
@@ -66,8 +66,8 @@ class DBStorage:
         from models.review import Review
         from models.base_model import BaseModel, Base
 
-
         Base.metadata.create_all(self.__engine)
-        session_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
+        session_factory = sessionmaker(bind=self.__engine,
+                                       expire_on_commit=False)
         Session = scoped_session(session_factory)
         self.__session = Session()
