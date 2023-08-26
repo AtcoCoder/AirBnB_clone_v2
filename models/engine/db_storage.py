@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+"""Database engine module"""
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
 from sqlalchemy.orm import scoped_session
@@ -11,6 +13,7 @@ DATABASE = getenv('HBNB_MYSQL_DB')
 
 
 class DBStorage:
+    """Database storage engine"""
     __engine = None
     __session = None
 
