@@ -18,7 +18,7 @@ class DBStorage:
     __session = None
 
     def __init__(self):
-        """Constructor"""
+        """Constructor of the class"""
         self.__engine = create_engine("mysql+mysqldb://{}:{}@{}/{}".format(
             USER, PASSWORD, HOST, DATABASE), pool_pre_ping=True)
         if getenv('HBNB_ENV') == 'test':
@@ -38,7 +38,7 @@ class DBStorage:
         cls_dict = {}
         cls_list = []
         if cls is None:
-            cls_list += [State, City]
+            cls_list += [State, City, User]
         else:
             cls_list.append(cls)
         for a_cls in cls_list:
