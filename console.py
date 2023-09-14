@@ -226,10 +226,10 @@ class HBNBCommand(cmd.Cmd):
                 return
             for k, v in models.storage.all().items():
                 if k.split('.')[0] == args:
-                    print_list.append(str(v))
+                    print_list.append(str(v).strip('"'))
         else:
             for k, v in models.storage.all().items():
-                print_list.append(str(v))
+                print_list.append(str(v).strip('"'))
 
         print(print_list)
 

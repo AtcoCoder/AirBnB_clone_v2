@@ -38,7 +38,7 @@ class DBStorage:
         cls_dict = {}
         cls_list = []
         if cls is None:
-            cls_list += [State, City, User, Place]
+            cls_list += [State, City, User, Place, Review]
         else:
             cls_list.append(cls)
         for a_cls in cls_list:
