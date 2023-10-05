@@ -9,4 +9,4 @@ def do_pack():
     """Generates archive of all file in web_static folder"""
 
     created_at = datetime.now().strftime('%Y%m%d%H%M%S')
-    local('tar -czvf web_static_{} web_static'.format(created_at))
+    local('tar -czvf web_static_{}.tgz web_static'.format(created_at))
