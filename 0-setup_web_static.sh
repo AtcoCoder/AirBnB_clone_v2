@@ -3,7 +3,7 @@
 
 if ! which nginx > /dev/null 2>&1; then
 	sudo apt-get update
-	sudo apt-get install nginx
+	sudo apt-get -y install nginx
 fi
 
 dir1="/data/"
@@ -40,7 +40,7 @@ then
 	sudo ln -s "$dir5" "$sn_dir"
 fi
 
-sudo chown -hR ubuntu:ubuntu "$dir1"
+sudo chown -R ubuntu:ubuntu "$dir1"
 
 server_config=\
 "server {
