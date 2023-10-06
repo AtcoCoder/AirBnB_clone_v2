@@ -5,7 +5,10 @@ from fabric.api import *
 from datetime import datetime
 import os
 
+
 env.hosts = ['35.153.19.110', '100.25.46.48']
+env.user = 'ubuntu'
+env.key_filename = '~/.ssh/school'
 
 def do_deploy(archive_path):
     """Generates archive of all file in web_static folder"""
