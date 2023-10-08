@@ -18,10 +18,13 @@ def do_deploy(archive_path):
         put(archive_path, '/tmp/')
         archive_file = run('ls /tmp/ | grep web_static_')
         extracted_files = archive_file.split('.')[0]
-        release_path = '/data/web_static/releases/{}'.format(extracted_files)
-        sudo('tar -xvf {} /tmp/{}'.format(release_path, archive_file))
+        release_path = '/data/web_static/releases/{}/'.format(extracted_files)
+	sudo('mkdir -p {}'.format(release_path))
+        sudo('tar -xzf /tmp/{} -C {}'.format(archive_file, release_path))
         sudo('rm /tmp/{}'.format(archive_file))
-        sudo('unlink /data/web_static/current')
+	sudo('mv {}/web_static/* {}'.format(release_path, release_path))
+	sudo('rm -rf {}/web_static'.format(release_path))
+        sudo('rm -rf /data/web_static/current')
         sudo('ln -s {} /data/web_static/current'.format(release_path))
     except Exception:
         return False
