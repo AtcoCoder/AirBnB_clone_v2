@@ -10,6 +10,7 @@ env.hosts = ['35.153.19.110', '100.25.46.48']
 env.user = 'ubuntu'
 env.key_filename = '~/.ssh/id_rsa'
 
+
 def do_deploy(archive_path):
     """Generates archive of all file in web_static folder"""
     if not os.path.exists(archive_path):
