@@ -8,7 +8,7 @@ import os
 
 env.hosts = ['35.153.19.110', '100.25.46.48']
 env.user = 'ubuntu'
-env.key_filename = '~/.ssh/school'
+env.key_filename = '~/.ssh/id_rsa'
 
 def do_deploy(archive_path):
     """Generates archive of all file in web_static folder"""
@@ -19,11 +19,11 @@ def do_deploy(archive_path):
         archive_file = run('ls /tmp/ | grep web_static_')
         extracted_files = archive_file.split('.')[0]
         release_path = '/data/web_static/releases/{}/'.format(extracted_files)
-	sudo('mkdir -p {}'.format(release_path))
+        sudo('mkdir -p {}'.format(release_path))
         sudo('tar -xzf /tmp/{} -C {}'.format(archive_file, release_path))
         sudo('rm /tmp/{}'.format(archive_file))
-	sudo('mv {}/web_static/* {}'.format(release_path, release_path))
-	sudo('rm -rf {}/web_static'.format(release_path))
+        sudo('mv {}web_static/* {}'.format(release_path, release_path))
+        sudo('rm -rf {}web_static'.format(release_path))
         sudo('rm -rf /data/web_static/current')
         sudo('ln -s {} /data/web_static/current'.format(release_path))
     except Exception:
