@@ -14,6 +14,7 @@ env.key_filename = '~/.ssh/id_rsa'
 
 
 def deploy():
+    """packs files and deploy them on the servers"""
     archive_path = do_pack()
     if not os.path.exists(archive_path):
         return False
