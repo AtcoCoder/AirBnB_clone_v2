@@ -12,4 +12,6 @@ def do_pack():
     if not os.path.exists(path):
         os.mkdir(path)
     created_at = datetime.now().strftime('%Y%m%d%H%M%S')
-    local('tar -czvf {}web_static_{}.tgz web_static'.format(path, created_at))
+    path += "web_static_{}.tgz".format(created_at)
+    local('tar -czvf {} web_static'.format(path))
+    return path
