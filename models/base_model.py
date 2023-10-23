@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+
 """This module defines a base class for all models in our hbnb clone"""
 import uuid
 from datetime import datetime
@@ -21,7 +22,10 @@ class BaseModel:
             self.updated_at = datetime.now()
         else:
             for key, val in kwargs.items():
-                if key == 'created_at' or key == 'updated_at':
+                if key == 'created_at':
+                    val = datetime.strptime(kwargs['created_at'],
+                                            '%Y-%m-%dT%H:%M:%S.%f')
+                if key == 'updated_at':
                     val = datetime.strptime(kwargs['updated_at'],
                                             '%Y-%m-%dT%H:%M:%S.%f')
                 if key != '__class__':
