@@ -50,5 +50,15 @@ def number_template(n):
     return render_template('5-number.html', number=n)
 
 
+@app.route('/number_odd_or_even/<int:n>')
+def number_odd_or_even(n):
+    """Check if number is odd or even and display on browser"""
+    state = 'odd'
+    if n % 2 == 0:
+        state = 'even'
+    text = f"Number: {n} is {state}"
+    return render_template('6-number_odd_or_even.html', text=text)
+
+
 if __name__ == "__main__":
     app.run()
