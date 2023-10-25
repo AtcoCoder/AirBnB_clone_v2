@@ -39,7 +39,7 @@ class Place(BaseModel, Base):
     amenity_ids = []
     if storage_type == 'db':
         reviews = relationship('Review',
-                               back_populates='place',
+                               backref='place',
                                cascade='all, delete-orphan')
         amenities = relationship('Amenity',
                              secondary='place_amenity',
