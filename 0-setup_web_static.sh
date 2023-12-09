@@ -68,6 +68,6 @@ server_config=\
 	}
 }"
 
-echo "$server_config" | sudo tee /etc/nginx/sites-available/default
+echo "$server_config" | sudo tee /etc/nginx/sites-enabled/default
 
 sudo service nginx restart
