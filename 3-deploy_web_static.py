@@ -8,7 +8,7 @@ do_deploy = __import__('2-do_deploy_web_static').do_deploy
 do_pack = __import__('1-pack_web_static').do_pack
 
 
-env.hosts = ['35.153.19.110', '100.25.46.48']
+env.hosts = ['18.207.1.231', '52.91.153.215']
 env.user = 'ubuntu'
 env.key_filename = '~/.ssh/id_rsa'
 
