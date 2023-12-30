@@ -25,12 +25,7 @@ def text(text):
     return f"C {new_text}"
 
 
-@app.route('/python/', strict_slashes=False)
-def python_():
-    """python is cool"""
-    return "Python is cool"
-
-
+@app.route('/python/', defaults={'text': 'is cool'}, strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
 def python_text(text):
     """displays text along with python"""
