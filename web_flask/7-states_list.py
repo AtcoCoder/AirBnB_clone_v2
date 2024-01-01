@@ -11,8 +11,12 @@ app = Flask(__name__)
 def get_states():
     """Renders webpage to show all states"""
     all_states = storage.all(State)
-    states = [state for state_key, state in all_states.items()]
-    return render_template('7-states_list.html', states=states)
+    states = {state.name: state for state_key, state in all_states.items()}
+    state_names = list(states.keys())
+    state_names.sort()
+    sorted_states = [states[name] for name in state_names]
+
+    return render_template('7-states_list.html', states=sorted_states)
 
 
 @app.teardown_appcontext
