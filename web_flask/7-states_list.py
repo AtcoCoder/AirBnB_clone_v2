@@ -16,7 +16,7 @@ def get_states():
 
 
 @app.teardown_appcontext
-def teardown_session(exception):
+def teardown_session(exe):
     """Closes current session"""
     storage.close()
 
