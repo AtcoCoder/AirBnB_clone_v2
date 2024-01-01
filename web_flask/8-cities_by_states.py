@@ -30,17 +30,17 @@ def get_cities_by_states():
     sorted_states = [states[name] for name in state_names]
     all_cities = storage.all(City)
     cities = {city.name: city for city_key, city in all_cities.items()}
-    city_names = list(cities.keys())
-    city_names.sort()
-    sorted_cities = [cities[name] for name in city_names]
 
     states = {}
     for state in sorted_states:
         state_cities = []
-        for city in sorted_cities:
+        for city_name, city in cities.items():
             if state.id == city.state_id:
                 state_cities.append(city)
-        states[state] = state_cities
+        city_names = [city.name for city in state_cities]
+        city_names.sort()
+        state_sorted_cities = [cities[name] for name in city_names]
+        states[state] = state_sorted_cities
 
     return render_template('8-cities_by_states.html', states=states)
 
